@@ -187,6 +187,8 @@ def handle_sentence(sentence):
             # if len(part3) == 0 and len(oldVerb) > 0:
             #     result.extend([(subject, oldVerb, verb)])
             # else:
+            if not subject and not verb:
+                return None
             result.extend([(subject, verb, part3)])
             oldVerb = verb
 

@@ -49,16 +49,19 @@ def get_location_triples(input, relation, keyword, pos):
                     full.append(result)
                 else:
                     partial.append(result)
-        print("RES locations: ", str(locations))
-        print("CLA no locations found: ", str(noLocation))
-        print("CLA full triples: ", str(full))
-        print("ERR partial triples: ", str(partial))
+        # print("RES locations: ", str(locations))
+        # print("CLA no locations found: ", str(noLocation))
+        # print("CLA full triples: ", str(full))
+        # print("ERR partial triples: ", str(partial))
         return locations + noLocation + full
 
 def call_location(input, relation, keyword, pos):
+    print("input:", input)
     result = get_location_triples(input, relation, keyword, pos)
     if result:
-        print(result)
+        print(str(result) + "\n")
+    else:
+        print("no results\n")
 
 def live_in(input):
     call_location(input, "live_in", "live", 1)

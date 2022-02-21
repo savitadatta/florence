@@ -1,0 +1,8 @@
+*.txt
+*.csv
+__pycache__/
+.vscode/
+olderversions/
+onboarding_sentences.py
+placenames/
+read.py

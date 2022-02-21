@@ -1,4 +1,4 @@
-from triples_module import find_subject_phrase, run, call_stanford_nlp, call_annotator, split_input
+from triples_module import run, call_stanford_nlp, call_annotator, split_input
 
 user = 'user'
 
