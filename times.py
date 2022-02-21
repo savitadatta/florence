@@ -86,14 +86,15 @@ def times(input, relation, keywords, pos):
             for e in hasNumbers:
                 suggestions = [
                     (subj, relation, e['normalizedNER']),
-                    (subj, rel, e['normalizedNER']),
-                    (subj, rel, analysis[2])]
+                    # (subj, rel, e['normalizedNER']),
+                    # (subj, rel, analysis[2])
+                    ]
                 for s in suggestions:
-                    print("keyword number " + str(s))
+                    # print("keyword number " + str(s))
                     if s not in number:
                         number.append(s)
             if len(hasNumbers) == 0:
-                print("keyword " + str((subj, rel, analysis[2])))
+                # print("keyword " + str((subj, rel, analysis[2])))
                 keyword.append((subj, rel, analysis[2]))
         else:
             hasNumbers = []
@@ -102,14 +103,15 @@ def times(input, relation, keywords, pos):
                 for e in hasNumbers:
                     suggestions = [
                         (subj, relation, e['normalizedNER']),
-                        (subj, rel, e['normalizedNER']),
-                        (subj, rel, analysis[2])]
+                        # (subj, rel, e['normalizedNER']),
+                        # (subj, rel, analysis[2])
+                        ]
                     for s in suggestions:
-                        print("number " + str(s))
+                        # print("number " + str(s))
                         if s not in number:
                             number.append(s)
             if len(hasNumbers) == 0:
-                print("other " + str((subj, rel, analysis[2])))
+                # print("other " + str((subj, rel, analysis[2])))
                 other.append((subj, rel, analysis[2]))
     print(str(number + keyword + other) + "\n")
 
