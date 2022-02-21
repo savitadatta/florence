@@ -76,6 +76,7 @@ def remove_contractions(listOfTuples):
     joined = joined.replace("wo n't", "won't")
     joined = joined.replace("ca n't", "can't")
     joined = joined.replace("n't", "not")
+    joined = joined.replace("'ll", "will")
     return joined
 
 
@@ -207,7 +208,7 @@ def run(input):
             verbPhrase = oldVerb
             verbIndices = [-1]
         else:
-            verbPhrase = join(verb)
+            verbPhrase = remove_contractions(verb)
             verbIndices = get_indices(verb)
 
         comp = join(

@@ -52,17 +52,18 @@ def get_triples_time(input, relation, keyword, pos):
 def only_complement(triple):
     return len(triple[0]) == 0 and len(triple[1]) == 0 and len(triple[2]) != 0
 
-def times(input, relation, keywords, pos):
-    phrases = split_input(input)
-    subj = ''
-    rel = ''
+def times(input, relation, keywords):
     CATEGORIES = ['NUMBER', 'TIME']
     number = []
     keyword = []
     other = []
+    subj = ''
+    rel = ''
+    print("input:", input)
+    
+    phrases = split_input(input)
 
     for phrase in phrases:
-        print("phrase: " + phrase)
         entities = call_annotator(phrase, ['ner'], 'entitymentions')
         analysis = run(phrase)
 
@@ -90,11 +91,9 @@ def times(input, relation, keywords, pos):
                     # (subj, rel, analysis[2])
                     ]
                 for s in suggestions:
-                    # print("keyword number " + str(s))
                     if s not in number:
                         number.append(s)
             if len(hasNumbers) == 0:
-                # print("keyword " + str((subj, rel, analysis[2])))
                 keyword.append((subj, rel, analysis[2]))
         else:
             hasNumbers = []
@@ -107,11 +106,9 @@ def times(input, relation, keywords, pos):
                         # (subj, rel, analysis[2])
                         ]
                     for s in suggestions:
-                        # print("number " + str(s))
                         if s not in number:
                             number.append(s)
             if len(hasNumbers) == 0:
-                # print("other " + str((subj, rel, analysis[2])))
                 other.append((subj, rel, analysis[2]))
     print(str(number + keyword + other) + "\n")
 
@@ -122,7 +119,6 @@ sentences = [
     "she likes to wake up around 7",
     "I like to get up around 7 o'clock",
     "He doesn't like being woken up before 8am",
-    "I like to wake up between 6 and 8",
     "I like to wake up between 6 and 8 o'clock",
     "She goes to work by 7 but I work at home so I can wake up at quarter to 7",
     "I like to wake up pretty early",
@@ -133,6 +129,6 @@ sentences = [
 ]
 
 for s in sentences:
-    times(s, "wake_at", ["wake", "get up", "woken"], 1)
+    times(s, "wake_at", ["wake", "get up", "woken"])
 #     print("\n" + s)
 #     print(get_triples_time(s, "wake_at", "wake", 1))
