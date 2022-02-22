@@ -88,7 +88,7 @@ def times(input, relation, keywords):
                 suggestions = [
                     (subj, relation, e['normalizedNER']),
                     # (subj, rel, e['normalizedNER']),
-                    # (subj, rel, analysis[2])
+                    (subj, rel, analysis[2])
                     ]
                 for s in suggestions:
                     if s not in number:
@@ -111,10 +111,12 @@ def times(input, relation, keywords):
             if len(hasNumbers) == 0:
                 other.append((subj, rel, analysis[2]))
     print(str(number + keyword + other) + "\n")
+    return number + keyword + other
 
+def wake_at(input):
+    times(input, "wake_at", ["wake", "get up", "woken"])
 
-
-sentences = [
+wake = [
     "7am",
     "she likes to wake up around 7",
     "I like to get up around 7 o'clock",
@@ -125,10 +127,19 @@ sentences = [
     "I wake up around 7 but my sister likes to wake up at 6am",
     "If I'm going into the office I'll wake up at 6, because I have to leave the house by 7",
     "I go to bed at 11pm",
-    "I have three cats"
+    "I have three cats",
+    "She goes to work by 7 but I work at home",
+    "They both go to work by bus",
+    "I wake my dogs",
+    "I wake my 3 dogs",
+    "At 7 I get up and water my three rose bushes"
 ]
 
-for s in sentences:
-    times(s, "wake_at", ["wake", "get up", "woken"])
+eat = []
+
+sleep = []
+
+for s in wake:
+    wake_at(s)
 #     print("\n" + s)
 #     print(get_triples_time(s, "wake_at", "wake", 1))

@@ -103,14 +103,6 @@ def find_subject(basicDependencies, rootPos):
     subject.sort()
     return subject
 
-def find_subject_phrase(sentence):
-    json = call_annotator(sentence, ['depparse'], 'basicDependencies')
-    try:
-        result = join(find_subject(json, get_root(json)))
-    except Exception:
-        return ""
-    return result
-
 def find_verb(basicDependencies, tokens, rootPos):
     """
     Determines the second part of a triple - the relation, or verb phrase.
@@ -147,14 +139,6 @@ def find_verb(basicDependencies, tokens, rootPos):
     #     vpos = -1
     # else:
     #     vpos = result[-1][0]
-    return result
-
-def find_verb_phrase(sentence):
-    json = call_stanford_nlp(sentence, ['depparse'])
-    try:
-        result = join(find_verb(json['basicDependencies'], json['tokens'], get_root(json['basicDependencies'])))
-    except Exception:
-        return ""
     return result
 
 def find_complement(basicDependencies, rootPos, subjIndices, verbIndices):
