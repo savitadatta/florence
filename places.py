@@ -1,9 +1,9 @@
 from difflib import SequenceMatcher
 from triples import call_stanford_nlp, run
 
-def similarity(a, b):
-    # https://stackoverflow.com/questions/17388213/find-the-similarity-metric-between-two-strings
-    return SequenceMatcher(None, a, b).ratio()
+# def similarity(a, b):
+#     # https://stackoverflow.com/questions/17388213/find-the-similarity-metric-between-two-strings
+#     return SequenceMatcher(None, a, b).ratio()
 
 user = "user"
 
@@ -39,6 +39,8 @@ def get_location_triples(input, relation, keyword, pos):
                     if 'LOCATION' in e["nerConfidences"].keys() and e["nerConfidences"]['LOCATION'] > 0.5:
                         suggestion = (result[0], joined, e['text'])
                         locations.append(suggestion)
+                        if result not in locations:
+                            locations.append(result)
                         somethingAdded = True
                 if len(entities) == 0 or not somethingAdded:
                     suggestion = (result[0], joined, result[2] if pos == 1 else replaced)
@@ -62,6 +64,7 @@ def call_location(input, relation, keyword, pos):
         print(str(result) + "\n")
     else:
         print("no results\n")
+    return result
 
 def live_in(input):
     call_location(input, "live_in", "live", 1)
@@ -69,7 +72,8 @@ def live_in(input):
 def born_in(input):
     call_location(input, "born_in", "born", 2)
 
-born = ["Logan",
+born = [
+    "Logan",
     "I was born in Hong Kong",
     "I was born in Hong Kong but my sister was born in Logan",
     "I was born in a town out west",
